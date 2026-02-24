@@ -5,9 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sign Up Page</title>
 </head>
+
 <body>
-<div id="content3">
-    <h3>Welcome to Sign Up page</h3>
+
+<div id="content3" class="min-h-screen flex items-center justify-center">
+
+    <div class="w-full max-w-md">
+
+        <!-- Combined Card -->
+        <div class="bg-white dark:bg-gray-800  border-l-4  border-blue-400
+                    dark:border-blue-500 rounded-lg shadow">
+
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h5 class="mb-2 text-2xl font-semibold
+                           text-blue-500 dark:text-blue-600">
+                    Signup Here...
+                </h5>
+
+                <p class="text-gray-600 dark:text-gray-300">
+                    Start managing your contacts
+                </p>
+            </div>
+
+
+            <!-- Form -->
+            <form class="p-4 space-y-5">
+<!--                Name-->
+                <div>
+                    <label for="name"
+                           class="block mb-2 text-sm font-medium
+                                  text-gray-900 dark:text-gray-200">
+                        Name
+                    </label>
+
+                    <input type="text"
+                           id="name"
+                           placeholder="Enter your name..."
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                  focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
+                                  dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                           required />
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email"
+                           class="block mb-2 text-sm font-medium
+                                  text-gray-900 dark:text-gray-200">
+                        Your email
+                    </label>
+
+                    <input type="email"
+                           id="email"
+                           placeholder="name@flowbite.com"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                  focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
+                                  dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                           required />
+                </div>
+
+
+                <!-- Password -->
+                <div>
+                    <label for="password"
+                           class="block mb-2 text-sm font-medium
+                                  text-gray-900 dark:text-gray-200">
+                        Your password
+                    </label>
+
+                    <input type="password"
+                           id="password"
+                           placeholder="••••••••"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                  focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
+                                  dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                           required />
+                </div>
+<!--                contact number-->
+                <div>
+                    <label for="contact-info"
+                           class="block mb-2 text-sm font-medium
+                                  text-gray-900 dark:text-gray-200">
+                        Contact Number
+                    </label>
+
+                    <input type="text"
+                           id="contact-info"
+                           placeholder="Enter your name..."
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                  focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
+                                  dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                           required />
+                </div>
+
+
+                <!-- Message -->
+                <div>
+                    <label for="message"
+                           class="block mb-2 text-sm font-medium
+                                  text-gray-900 dark:text-gray-200">
+                        Write something about yourself
+                    </label>
+
+                    <textarea id="message" rows="4"
+                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                     focus:ring-blue-500 focus:border-blue-500 block w-full p-2
+                                     dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                              placeholder="Write here..."></textarea>
+                </div>
+
+
+                <!-- Checkbox -->
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox"
+                           class="w-4 h-4 rounded border-gray-300
+                  text-blue-600 accent-blue-600
+                  focus:ring-blue-500 dark:bg-gray-700
+                  dark:border-gray-600" required />
+                    <span class="text-sm text-gray-900 dark:text-gray-300">
+                      I agree with the
+                        <a href="#" class="text-blue-600 hover:underline dark:text-blue-400">
+                            terms and conditions
+                        </a>
+                    </span>
+                </label>
+
+
+                <!-- Button -->
+                <button type="submit"
+                        class="w-full text-white bg-blue-700 hover:bg-blue-800
+                               focus:ring-4 focus:ring-blue-300 font-medium rounded-lg
+                               text-sm px-4 py-2
+                               dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Submit
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
 </div>
+
 </body>
 </html>
