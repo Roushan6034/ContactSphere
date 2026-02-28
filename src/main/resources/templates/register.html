@@ -11,11 +11,13 @@
 <div id="content3" class="min-h-screen flex items-center justify-center">
 
     <div class="w-full max-w-md">
+        <!--        message-->
 
         <!-- Combined Card -->
         <div class="bg-white dark:bg-gray-800  border-l-4  border-blue-400
                     dark:border-blue-500 rounded-lg shadow">
-
+            <div th:replace="message :: messagebox"
+                 class="px-4 py-3 mb-0"></div>
             <!-- Header -->
             <div class="p-4 border-b border-gray-200 dark:border-gray-700">
                 <h5 class="mb-2 text-2xl font-semibold
@@ -30,8 +32,14 @@
 
 
             <!-- Form -->
-            <form class="p-4 space-y-5">
-<!--                Name-->
+            <form th:action="@{'/do-register'}"
+                  method="post"
+                  th:object="${userForm}"
+                  class="p-4
+                  space-y-5"
+                  novalidate>
+
+                <!--                Name-->
                 <div>
                     <label for="name"
                            class="block mb-2 text-sm font-medium
@@ -41,11 +49,17 @@
 
                     <input type="text"
                            id="name"
+                           th:field="*{name}"
                            placeholder="Enter your name..."
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                   focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
                                   dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                            required />
+                    <p th:if="${#fields.hasErrors('name')}"
+                       th:errors="*{name}"
+                       class="text-red-500 text-sm mt-1">
+                    </p>
+
                 </div>
 
                 <!-- Email -->
@@ -58,11 +72,17 @@
 
                     <input type="email"
                            id="email"
+                           th:field="*{email}"
                            placeholder="name@flowbite.com"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                   focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
                                   dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                            required />
+                    <p th:if="${#fields.hasErrors('email')}"
+                       th:errors="*{email}"
+                       class="text-red-500 text-sm mt-1">
+                    </p>
+
                 </div>
 
 
@@ -76,13 +96,19 @@
 
                     <input type="password"
                            id="password"
+                           th:field="*{password}"
                            placeholder="••••••••"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                   focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
                                   dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                            required />
+                    <p th:if="${#fields.hasErrors('password')}"
+                       th:errors="*{password}"
+                       class="text-red-500 text-sm mt-1">
+                    </p>
+
                 </div>
-<!--                contact number-->
+                <!--                contact number-->
                 <div>
                     <label for="contact-info"
                            class="block mb-2 text-sm font-medium
@@ -92,11 +118,17 @@
 
                     <input type="text"
                            id="contact-info"
+                           th:field="*{phoneNumber}"
                            placeholder="Enter your name..."
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                   focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
                                   dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                            required />
+                    <p th:if="${#fields.hasErrors('phoneNumber')}"
+                       th:errors="*{phoneNumber}"
+                       class="text-red-500 text-sm mt-1">
+                    </p>
+
                 </div>
 
 
@@ -109,10 +141,16 @@
                     </label>
 
                     <textarea id="message" rows="4"
+                              th:field="*{about}"
                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                      focus:ring-blue-500 focus:border-blue-500 block w-full p-2
                                      dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                               placeholder="Write here..."></textarea>
+                    <p th:if="${#fields.hasErrors('about')}"
+                       th:errors="*{about}"
+                       class="text-red-500 text-sm mt-1">
+                    </p>
+
                 </div>
 
 
