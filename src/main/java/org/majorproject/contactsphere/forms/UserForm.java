@@ -19,10 +19,10 @@ public class UserForm {
     @Email(message = "Invalid Email Address")
     private String email;
     @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
-    @Pattern(
-            regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",
-            message = "Password must contain uppercase, lowercase, number and special character"
-    )
+//    @Pattern(
+//            regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",
+//            message = "Password must contain uppercase, lowercase, number and special character"
+//    )
     private String password;
     @NotBlank(message = "About Required")
     private String about;

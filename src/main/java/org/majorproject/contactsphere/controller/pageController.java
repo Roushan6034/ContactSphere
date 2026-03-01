@@ -40,7 +40,7 @@ public class pageController {
         System.out.println("This is the service page");
         return "services";
     }
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login")
     public String login(){
         System.out.println("This is the login page");
         return "login";

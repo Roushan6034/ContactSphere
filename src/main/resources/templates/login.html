@@ -1,13 +1,114 @@
 <!doctype html>
-<html lang="en" th:replace="~{base::parent(~{::#content3},~{::title})}">
+<html lang="en" th:replace="~{base::parent(~{::#content4},~{::title})}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login Page</title>
 </head>
 <body>
-<div id="content3">
-  <h3>Welcome to Login page</h3>
+<div id="content4" class="min-h-screen flex items-center justify-center">
+
+  <div class="w-full max-w-md">
+    <!--        message-->
+
+    <!-- Combined Card -->
+    <div class="bg-white dark:bg-gray-800  border-l-4  border-blue-400
+                    dark:border-blue-500 rounded-lg shadow">
+      <div th:replace="message :: messagebox"
+           class="px-4 py-3 mb-0"></div>
+      <!-- Header -->
+      <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+        <h5 class="mb-2 text-2xl font-semibold
+                           text-blue-500 dark:text-blue-600">
+          Login Here...
+        </h5>
+
+        <p class="text-gray-600 dark:text-gray-300">
+          Start managing your contacts
+        </p>
+      </div>
+
+
+      <!-- Form -->
+      <form
+              th:action="@{/authenticate}"
+              method="post"
+            class="p-4
+                  space-y-5"
+            >
+
+        <!--                Name-->
+
+        <!-- Email -->
+        <div>
+          <label for="email"
+                 class="block mb-2 text-sm font-medium
+                                  text-gray-900 dark:text-gray-200">
+           Username
+          </label>
+
+          <input type="email"
+                 id="email"
+                 name="email"
+                 placeholder="name@flowbite.com"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                  focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
+                                  dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                 required />
+<!--          <p th:if="${#fields.hasErrors('email')}"-->
+<!--             th:errors="*{email}"-->
+<!--             class="text-red-500 text-sm mt-1">-->
+<!--          </p>-->
+
+        </div>
+
+
+        <!-- Password -->
+        <div>
+          <label for="password"
+                 class="block mb-2 text-sm font-medium
+                                  text-gray-900 dark:text-gray-200">
+            Your password
+          </label>
+
+          <input type="password"
+                 id="password"
+                 name="password"
+                 placeholder="••••••••"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                  focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2
+                                  dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                 required />
+<!--          <p th:if="${#fields.hasErrors('password')}"-->
+<!--             th:errors="*{password}"-->
+<!--             class="text-red-500 text-sm mt-1">-->
+<!--          </p>-->
+
+        </div>
+        <!--                contact number-->
+
+
+
+        <!-- Message -->
+
+
+        <!-- Checkbox -->
+
+        <!-- Button -->
+        <button type="submit"
+                class="w-full text-white bg-blue-700 hover:bg-blue-800
+                               focus:ring-4 focus:ring-blue-300 font-medium rounded-lg
+                               text-sm px-4 py-2
+                               dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Login
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
 </div>
 </body>
 </html>

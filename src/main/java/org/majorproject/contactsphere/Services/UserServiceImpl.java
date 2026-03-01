@@ -4,6 +4,8 @@ import org.majorproject.contactsphere.entities.User;
 import org.majorproject.contactsphere.helpers.ResourceNotFoundException;
 import org.majorproject.contactsphere.reposatories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +16,12 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
     @Autowired
    private UserRepo userRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Override
     public User saveUser(User user) {
         String uuid = UUID.randomUUID().toString();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserId(uuid);
         return userRepo.save(user);
     }
