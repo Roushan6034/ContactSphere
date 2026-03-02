@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ContactSphereApplication {
 
     public static void main(String[] args) {
+        System.out.println("DB_PASSWORD: " + System.getenv("DB_PASSWORD"));
         SpringApplication.run(ContactSphereApplication.class, args);
     }
 
