@@ -19,6 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Autowired
     private SecurityCustomUserDetailService userDetailService;
+    @Autowired
+    private OAuthAthenticationSuccessHandler handler;
     @Bean
      public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
          http.csrf(AbstractHttpConfigurer::disable)
@@ -36,9 +38,17 @@ public class SecurityConfig {
          });
          http.logout(logout -> {
              logout.logoutUrl("/logout");
-             logout.logoutSuccessUrl("/login");
+             logout.logoutSuccessUrl("/login?logout");
+             logout.invalidateHttpSession(true);
+             logout.clearAuthentication(true);
 
          });
+        http.oauth2Login(oauth -> {
+            oauth.loginPage("/login");
+//            oauth.defaultSuccessUrl("/user/dashboard");
+            oauth.failureUrl("/login?error");
+            oauth.successHandler(handler);
+        });
          return http.build();
      }
 
