@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" th:replace="~{base::parent(~{:: #content5}, ~{::title})}">
 <head>
     <meta charset="UTF-8">
-    <title>user dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
 </head>
 <body>
-  <h1>This is user dashboard</h1>
-  <h1 th:text="${loggedInUser.name}"></h1>
-  <h1 th:text="${loggedInUser.email}"></h1>
-  <form th:action="@{/logout}" method="post">
-      <button type="submit">Logout</button>
-  </form>
+<div id="content5">
+    <div th:if="${loggedInUser}">
+        <div th:replace="~{user/sidebar::sidebar}"></div>
+    </div>
+    <div  class="sm:pl-64 pt-8" style="height: 1000px">
+        <div class="flex justify-center flex-col items-center">
+            <h3 class="text-5xl">Welcome to Dashboard </h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Eligendi et facere labore nam nemo non,
+            </p>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
