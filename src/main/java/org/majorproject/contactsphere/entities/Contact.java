@@ -1,12 +1,19 @@
 package org.majorproject.contactsphere.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "contact_info")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
 public class Contact {
     @Id
     private String id;
@@ -18,6 +25,9 @@ public class Contact {
     @Column(length = 1000)
     private String description;
     private String favorite;
+    private String linkedinLink;
+    private String instagramLink;
+    @Column(length = 1000)
     private String websiteLink;
     @ManyToOne
     private User user;
