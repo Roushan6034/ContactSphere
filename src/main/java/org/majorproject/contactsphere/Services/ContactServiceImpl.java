@@ -68,4 +68,9 @@ public class ContactServiceImpl implements ContactService {
     public Contact getContactByEmail(String email) {
         return contactRepo.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Contact Not found"));
     }
+
+    @Override
+    public List<Contact> getByUser(User user) {
+        return contactRepo.findByUser(user);
+    }
 }

@@ -1,5 +1,8 @@
+<!-- message.html -->
 <div th:if="${msg}" th:fragment="messagebox"
-     th:class="|px-4 py-3 mb-0 text-sm text-${msg.messageType}-800 bg-${msg.messageType}-100|"
+     class="px-4 py-3 mb-3 text-sm text-green-800 bg-green-100 rounded-lg"
      role="alert">
+
     <span th:text="${msg.message}" class="font-medium"></span>
+
 </div>

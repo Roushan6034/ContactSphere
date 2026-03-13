@@ -15,14 +15,16 @@
       <div class="col-span-3"></div>
       <div class="col-span-12 md:col-span-6">
         <div class="card block p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+<!--          <div th:replace="message :: messagebox"-->
+<!--               class="px-4 py-3 mb-0"></div>-->
           <h1 class="text-2xl font-semibold">Add New Contact</h1>
           <p class="text-gray-500">This Contact will be directly stored on the cloud...</p>
-          <form class="mt-4 space-y-4"
+          <form novalidate class="mt-4 space-y-4"
                 th:action="@{'/user/contacts/add'}"
                 th:object="${contactForm}"
                 method="post"
+                enctype="multipart/form-data"
           >
-
             <!-- Contact Name -->
             <div>
               <label for="contact-name" class="block mb-2.5 text-sm font-medium text-gray-900 dark:text-white">Contact Name</label>
@@ -34,6 +36,10 @@
                        class="rounded-none rounded-r-lg block w-full px-3 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-400"
                        placeholder="Name">
               </div>
+              <p th:if="${#fields.hasErrors('name')}"
+                 th:errors="*{name}"
+                 class="text-red-500 text-sm mt-1">
+              </p>
             </div>
 
             <!-- Email -->
@@ -46,7 +52,12 @@
                 <input type="email" id="contact-email" th:field="*{email}"
                        class="rounded-none rounded-r-lg block w-full px-3 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-400"
                        placeholder="user@example.com">
+
               </div>
+              <p th:if="${#fields.hasErrors('email')}"
+                 th:errors="*{email}"
+                 class="text-red-500 text-sm mt-1">
+              </p>
             </div>
 
             <!-- Phone Number -->
@@ -59,7 +70,12 @@
                 <input type="tel" id="contact-phone" th:field="*{phoneNumber}"
                        class="rounded-none rounded-r-lg block w-full px-3 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-400"
                        placeholder="+91 1 234 567 890">
+
               </div>
+              <p th:if="${#fields.hasErrors('phoneNumber')}"
+                 th:errors="*{phoneNumber}"
+                 class="text-red-500 text-sm mt-1">
+              </p>
             </div>
 
             <!-- Address -->
@@ -73,6 +89,10 @@
                        class="rounded-none rounded-r-lg block w-full px-3 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-400"
                        placeholder="123 Main St, Mumbai , India">
               </div>
+              <p th:if="${#fields.hasErrors('address')}"
+                 th:errors="*{address}"
+                 class="text-red-500 text-sm mt-1">
+              </p>
             </div>
             <!-- Description -->
             <div>
@@ -85,6 +105,10 @@
                           class="block w-full pl-10 px-3 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-400"
                           placeholder="Brief description about this contact..."></textarea>
               </div>
+              <p th:if="${#fields.hasErrors('description')}"
+                 th:errors="*{description}"
+                 class="text-red-500 text-sm mt-1">
+              </p>
             </div>
             <!--            social links-->
             <div>
@@ -98,7 +122,12 @@
                   <input type="url" id="contact-linkedin" th:field="*{linkedinLink}"
                          class="rounded-none rounded-r-lg block w-full px-3 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-400"
                          placeholder="https://linkedin.com/in/username">
+
                 </div>
+                <p th:if="${#fields.hasErrors('linkedinLink')}"
+                   th:errors="*{linkedinLink}"
+                   class="text-red-500 text-sm mt-1">
+                </p>
                 <!-- Instagram -->
                 <div class="flex shadow-sm rounded-lg">
                    <span class="inline-flex items-center px-3 text-sm text-gray-900 dark:text-gray-400 bg-gray-100 dark:bg-gray-600 border border-gray-300 dark:border-gray-600 border-r-0 rounded-l-lg">
@@ -107,7 +136,12 @@
                   <input type="url" id="contact-instagram" th:field="*{instagramLink}"
                          class="rounded-none rounded-r-lg block w-full px-3 py-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-400"
                          placeholder="https://instagram.com/username">
+
                 </div>
+                <p th:if="${#fields.hasErrors('instagramLink')}"
+                   th:errors="*{instagramLink}"
+                   class="text-red-500 text-sm mt-1">
+                </p>
 
               </div>
             </div>
@@ -129,7 +163,7 @@
                   <i class="fa-solid fa-cloud-arrow-up text-xl text-gray-400 dark:text-gray-300 mb-1"></i>
                   <span class="text-sm text-gray-500 dark:text-gray-400 font-medium">Click to upload</span>
                   <span class="text-xs text-gray-400 dark:text-gray-500">PNG, JPG, JPEG (max 2MB)</span>
-                  <input id="contact-image" name="contactImage" type="file" accept="image/*" class="hidden"
+                  <input id="contact-image" th:field="*{picture}" name="contactImage" type="file" accept="image/*" class="hidden"
                          onchange="
              const file = this.files[0];
              if(file){

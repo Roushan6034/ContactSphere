@@ -8,8 +8,6 @@ import org.majorproject.contactsphere.forms.UserForm;
 import org.majorproject.contactsphere.helpers.Message;
 import org.majorproject.contactsphere.helpers.MessageType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,7 +31,7 @@ public class pageController {
     @RequestMapping("/contacts")
     public String contacts(){
         System.out.println("This is the contact page");
-        return "contacts";
+        return "contact";
     }
     @RequestMapping("/services")
     public String services(){

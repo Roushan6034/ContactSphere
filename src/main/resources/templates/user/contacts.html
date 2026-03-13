@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" th:replace="~{base::parent(~{:: #content5}, ~{::title})}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>View Contacts</title>
+</head>
+<body>
+<div id="content5">
+  <div th:if="${loggedInUser}">
+    <div th:replace="~{user/sidebar::sidebar}"></div>
+  </div>
+
+  <div class="sm:pl-64 min-h-screen">
+
+    <!-- Header -->
+    <div class="border-b border-gray-200 dark:border-gray-700 px-3 py-1 text-center">
+      <h3 class="text-2xl font-bold text-gray-800 dark:text-white">View Contacts</h3>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">List of all contacts</p>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6">
+      <div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm">
+
+        <!-- Toolbar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+
+          <!-- Dropdown -->
+          <div class="relative">
+            <button onclick="document.getElementById('dropdown').classList.toggle('hidden')"
+                    class="inline-flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none">
+              Action
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="dropdown" class="hidden absolute left-0 mt-1 z-10 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl shadow-md w-36">
+              <ul class="p-1.5 text-sm text-gray-700 dark:text-gray-300">
+                <li><a href="#" class="flex w-full px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">Reward</a></li>
+                <li><a href="#" class="flex w-full px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">Promote</a></li>
+                <li><a href="#" class="flex w-full px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">Archive</a></li>
+                <li><a href="#" class="flex w-full px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500">Delete</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Search -->
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+              </svg>
+            </div>
+            <input type="text" id="searchInput" placeholder="Search"
+                   class="pl-9 pr-4 py-2 text-sm bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 w-64 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-400">
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left" id="contactsTable">
+            <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+            <tr>
+              <th class="px-6 py-3 font-semibold">Name</th>
+              <th class="px-6 py-3 font-semibold hidden sm:table-cell">Phone</th>
+              <th class="px-6 py-3 font-semibold hidden md:table-cell">Address</th>
+              <th class="px-6 py-3 font-semibold">Links</th>
+              <th class="px-6 py-3 font-semibold">Action</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-100 dark:divide-gray-700">
+
+            <tr th:object="${c}" th:each=" c : ${contacts}" class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-3">
+                  <img class="w-9 h-9 rounded-full object-cover ring-2 ring-gray-100 dark:ring-gray-600" onerror="this.src='https://www.freepik.com/free-vector/young-man-with-glasses-avatar_370751043.htm#fromView=keyword&page=1&position=10&uuid=f71b74fb-bbbb-4f18-aa57-d2f0a02745a3&query=Default+user'" th:src="@{*{picture}}" alt="Neil">
+                  <div>
+                    <div class="font-semibold text-gray-800 dark:text-white" th:text="*{name}" >Neil Sims</div>
+                    <div class="text-xs text-gray-400 dark:text-gray-500" th:text="*{email}"  >neil.sims@email.com</div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 hidden sm:table-cell text-gray-600 dark:text-gray-400"  >
+                <i class="fa-solid fa-phone"></i>
+                <span th:text="*{phoneNumber}"></span>
+              </td>
+              <td class="px-6 py-4 hidden md:table-cell text-gray-600 dark:text-gray-400" th:text="*{address}" >Mumbai, India</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                  <i th:if="${c.favorite}" class="fa-solid fa-star text-yellow-400 text-base"></i>
+                  <i th:unless="${c.favorite}" class="fa-regular fa-star text-gray-300 dark:text-gray-600 text-base"></i>
+                  <a th:href="${c.linkedinLink}" target="_blank" class="text-blue-500 dark:text-blue-400 hover:opacity-80 text-base">
+                    <i class="fa-brands fa-linkedin"></i>
+                  </a>
+                  <a th:href="${c.instagramLink}" target="_blank" class="text-pink-500 hover:opacity-80 text-base">
+                    <i class="fa-brands fa-square-instagram"></i>
+                  </a>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <a href=""><i class="fa-solid fa-trash"></i></a>
+                <a href=""><i class="fa-solid fa-pen"></i></a>
+                <a href=""><i class="fa-solid fa-eye"></i></a>
+              </td>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-6 py-3 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs text-gray-400 dark:text-gray-500">
+          Showing 1–5 of 5 contacts
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('#contactsTable tbody tr').forEach(row => {
+      row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none';
+    });
+  });
+</script>
+</body>
+</html>

@@ -15,4 +15,5 @@ public interface ContactService {
     boolean isContactExistByEmail(String email);
     List<Contact> getAllContact();
     Contact getContactByEmail(String email);
+    List<Contact>getByUser(User user);
 }
