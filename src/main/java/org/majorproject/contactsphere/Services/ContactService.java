@@ -2,6 +2,8 @@ package org.majorproject.contactsphere.Services;
 
 import org.majorproject.contactsphere.entities.Contact;
 import org.majorproject.contactsphere.entities.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,5 +17,5 @@ public interface ContactService {
     boolean isContactExistByEmail(String email);
     List<Contact> getAllContact();
     Contact getContactByEmail(String email);
-    List<Contact>getByUser(User user);
+    Page<Contact> getByUser(User user, int page, int size,String sortBy,String direction);
 }

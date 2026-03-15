@@ -3,6 +3,8 @@ package org.majorproject.contactsphere.reposatories;
 import org.majorproject.contactsphere.entities.Contact;
 
 import org.majorproject.contactsphere.entities.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -12,5 +14,5 @@ public interface ContactRepo extends JpaRepository<Contact,String> {
     Optional<Contact> findByEmail(String email);
     boolean existsByEmail(String email);
 
-    List<Contact> findByUser(User user);
+    Page<Contact> findByUser(User user, Pageable pageable);
 }

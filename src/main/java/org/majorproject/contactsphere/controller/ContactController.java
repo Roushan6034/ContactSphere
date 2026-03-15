@@ -15,6 +15,7 @@ import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -69,11 +71,16 @@ public class ContactController {
 
     }
     @RequestMapping
-    public String viewContacts(Authentication authentication,Model model) {
+    public String viewContacts(
+            @RequestParam(value = "page",defaultValue = "0") int page,
+            @RequestParam(value = "size",defaultValue = "4") int size,
+            @RequestParam(value = "sortBy",defaultValue = "name") String sortBy,
+            @RequestParam(value = "direction",defaultValue = "asc") String direction,
+            Authentication authentication,Model model) {
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
-        List<Contact> contacts = contactService.getByUser(user);
-        model.addAttribute("contacts", contacts);
+        Page<Contact> pageContact = contactService.getByUser(user,page,size,sortBy,direction);
+        model.addAttribute("pageContact",pageContact);
         return "user/contacts";
     }
 
