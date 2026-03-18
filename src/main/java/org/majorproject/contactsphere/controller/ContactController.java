@@ -8,6 +8,7 @@ import org.majorproject.contactsphere.Services.UserService;
 import org.majorproject.contactsphere.entities.Contact;
 import org.majorproject.contactsphere.entities.User;
 import org.majorproject.contactsphere.forms.ContactForm;
+import org.majorproject.contactsphere.forms.ContactSearchForm;
 import org.majorproject.contactsphere.helpers.Helper;
 import org.majorproject.contactsphere.helpers.Message;
 import org.majorproject.contactsphere.helpers.MessageType;
@@ -81,7 +82,36 @@ public class ContactController {
         User user = userService.getUserByEmail(username);
         Page<Contact> pageContact = contactService.getByUser(user,page,size,sortBy,direction);
         model.addAttribute("pageContact",pageContact);
+        model.addAttribute("contactSearchForm",new ContactSearchForm());
         return "user/contacts";
+    }
+    @RequestMapping("/search")
+    public String searchHandler(
+            @ModelAttribute ContactSearchForm contactSearchForm,
+            @RequestParam(value="size", defaultValue = "4")int size,
+            @RequestParam(value="page",defaultValue = "0")int page,
+            @RequestParam(value="sortBy",defaultValue = "name")String sortBy,
+            @RequestParam(value="sortOrder",defaultValue = "asc") String direction,
+            Model model,
+            Authentication authentication
+
+    ){
+        User user = userService.getUserByEmail(Helper.getEmailOfLoggedInUser(authentication));
+        Page<Contact> pageContact = null;
+        if(contactSearchForm.getField().equalsIgnoreCase("name")) {
+             pageContact = contactService.searchByName(contactSearchForm.getValue(), size, page, sortBy, direction,user);
+        }
+        else if(contactSearchForm.getField().equalsIgnoreCase("email")) {
+            pageContact = contactService.searchByEmail(contactSearchForm.getValue(), size, page, sortBy, direction,user);
+
+        }
+        else if(contactSearchForm.getField().equalsIgnoreCase("Phone")) {
+            pageContact = contactService.searchByPhoneNumber(contactSearchForm.getValue(), size, page, sortBy, direction,user);
+        }
+        model.addAttribute("pageContact",pageContact);
+        model.addAttribute("contactSearchForm",contactSearchForm);
+
+        return "user/search";
     }
 
 }

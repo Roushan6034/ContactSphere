@@ -15,4 +15,7 @@ public interface ContactRepo extends JpaRepository<Contact,String> {
     boolean existsByEmail(String email);
 
     Page<Contact> findByUser(User user, Pageable pageable);
+    Page<Contact>findByUserAndNameContainingIgnoreCase(User user,String name, Pageable pageable);
+    Page<Contact>findByUserAndEmailContainingIgnoreCase(User user,String email, Pageable pageable);
+    Page<Contact>findByUserAndPhoneNumberContainingIgnoreCase(User user,String PhoneNumber, Pageable pageable);
 }

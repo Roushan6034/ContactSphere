@@ -16,6 +16,9 @@ public interface ContactService {
     boolean isContactExist(String userId);
     boolean isContactExistByEmail(String email);
     List<Contact> getAllContact();
+    Page<Contact> searchByName(String name,int size, int page,String sortBy,String sortOrder,User user);
+    Page<Contact> searchByEmail(String email,int size,int page,String sortBy,String sortOrder,User user);
+    Page<Contact> searchByPhoneNumber(String phone,int size,int page,String sortBy,String sortOrder,User user);
     Contact getContactByEmail(String email);
     Page<Contact> getByUser(User user, int page, int size,String sortBy,String direction);
 }

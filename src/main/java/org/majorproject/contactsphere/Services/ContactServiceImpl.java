@@ -72,6 +72,28 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    public Page<Contact> searchByName(String name, int size, int page, String sortBy, String sortOrder,User user) {
+        Sort sort=sortOrder.equals("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        PageRequest pageable = PageRequest.of(page, size, sort);
+        return contactRepo.findByUserAndNameContainingIgnoreCase(user,name,pageable);
+    }
+
+
+    @Override
+    public Page<Contact> searchByEmail(String email, int size,int page, String sortBy, String sortOrder,User user) {
+        Sort sort=sortOrder.equals("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        PageRequest pageable = PageRequest.of(page, size, sort);
+        return contactRepo.findByUserAndEmailContainingIgnoreCase(user,email,pageable);
+    }
+
+    @Override
+    public Page<Contact> searchByPhoneNumber(String phone, int size,int page, String sortBy, String sortOrder,User user) {
+        Sort sort=sortOrder.equals("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        PageRequest pageable = PageRequest.of(page, size, sort);
+        return contactRepo.findByUserAndPhoneNumberContainingIgnoreCase(user,phone,pageable);
+    }
+
+    @Override
     public Contact getContactByEmail(String email) {
         return contactRepo.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Contact Not found"));
     }
