@@ -2,6 +2,7 @@ package org.majorproject.contactsphere.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class Contact {
     @Column(length = 1000)
     private String websiteLink;
     @ManyToOne
+    @JsonIgnore
     private User user;
     @OneToMany(mappedBy = "contact",cascade = CascadeType.ALL , fetch = FetchType.LAZY, orphanRemoval = true)
     private List<SocialLink> socialLinks=new ArrayList<>();

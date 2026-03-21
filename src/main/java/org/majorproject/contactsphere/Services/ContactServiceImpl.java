@@ -104,4 +104,9 @@ public class ContactServiceImpl implements ContactService {
         PageRequest pageRequest = PageRequest.of(page,size,sort);
         return contactRepo.findByUser(user,pageRequest);
     }
+
+    @Override
+    public Contact getById(String contactId) {
+        return contactRepo.findById(contactId).orElseThrow(() -> new ResourceNotFoundException("Contact Not found"));
+    }
 }

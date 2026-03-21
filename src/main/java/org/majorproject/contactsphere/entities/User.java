@@ -2,6 +2,7 @@ package org.majorproject.contactsphere.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,6 +40,7 @@ public class User  implements UserDetails {
     private Providers provider=Providers.SELF;
     private String providerUserId;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL , fetch = FetchType.LAZY, orphanRemoval = true)
+//    @JsonIgnore
     private List<Contact> contacts=new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles=new ArrayList<>();
