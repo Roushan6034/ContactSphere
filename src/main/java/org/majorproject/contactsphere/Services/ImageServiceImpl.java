@@ -18,6 +18,9 @@ public class ImageServiceImpl implements ImageService {
     }
     @Override
     public String uploadImage(MultipartFile picture) {
+        if (picture == null || picture.isEmpty()) {
+            throw new RuntimeException("File is empty");
+        }
         String filename= UUID.randomUUID().toString();
         try {
             byte[] data = new byte[picture.getInputStream().available()];

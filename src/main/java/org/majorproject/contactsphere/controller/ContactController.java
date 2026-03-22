@@ -1,5 +1,6 @@
 package org.majorproject.contactsphere.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.majorproject.contactsphere.Services.ContactService;
@@ -21,10 +22,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -112,6 +111,17 @@ public class ContactController {
         model.addAttribute("contactSearchForm",contactSearchForm);
 
         return "user/search";
+    }
+    @RequestMapping("/delete/{userId}")
+    public String deleteContact(@PathVariable("userId")String userId, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes) {
+        System.out.println("Deleting contact with id "+userId);
+        contactService.deleteContact(userId);
+        String referer = request.getHeader("Referer");
+        redirectAttributes.addFlashAttribute("message", Message.builder().message("Contact deleted successfully").messageType(MessageType.green).build());
+//        session.setAttribute("message",Message.builder().message("Contact deleted successfully").messageType(MessageType.green).build());
+        return "redirect:" + (referer != null ? referer : "/user/contacts");
+
+
     }
 
 }

@@ -1,5 +1,5 @@
 console.log("contacts.js loaded");
-
+const baseURL = window.location.origin + "/";
 document.addEventListener('DOMContentLoaded', function () {
 
     const viewContactModal = document.getElementById("view-contact-modal");
@@ -133,4 +133,28 @@ async function loadContactdata(id) {
     } catch (error) {
         console.error("Failed to load contact:", error);
     }
+}
+async function deleteContact(id) {
+
+    Swal.fire({
+        title: "Are you sure u want to delete this contact?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed){
+            console.log("Confirm deleted!");
+            const url= `${baseURL}user/contacts/delete/`+id;
+            window.location.replace(url);
+        }
+            // Swal.fire({
+        //
+        //     title: "Deleted!",
+        //     text: "Your file has been deleted.",
+        //     icon: "success"
+        // });
+    });
 }
