@@ -51,6 +51,8 @@ public class ContactServiceImpl implements ContactService {
         contact1.setPicture(contact.getPicture());
         contact1.setFavorite(contact.getFavorite());
         contact1.setDescription(contact.getDescription());
+        contact1.setInstagramLink(contact.getInstagramLink());
+        contact1.setLinkedinLink(contact.getLinkedinLink());
         Contact save = contactRepo.save(contact1);
         return Optional.of(save);
     }

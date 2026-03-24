@@ -39,6 +39,7 @@ public class ContactForm {
 //            message = "Picture must be a valid image URL"
 //    )
     private MultipartFile picture;
+    private  String image;
 
     @Size(max = 500, message = "Description must not exceed 500 characters")
     private String description;

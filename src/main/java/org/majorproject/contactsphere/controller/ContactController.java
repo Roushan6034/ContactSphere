@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user/contacts")
@@ -121,7 +122,64 @@ public class ContactController {
 //        session.setAttribute("message",Message.builder().message("Contact deleted successfully").messageType(MessageType.green).build());
         return "redirect:" + (referer != null ? referer : "/user/contacts");
 
+    }
+    @GetMapping("/view/{contactId}")
+    public String updateContactForm(@PathVariable("contactId") String contactId, Model model, RedirectAttributes redirectAttributes) {
+        Contact contact = contactService.getById(contactId);
+        ContactForm contactForm = new ContactForm();
+        contactForm.setName(contact.getName());
+        contactForm.setEmail(contact.getEmail());
+        contactForm.setAddress(contact.getAddress());
+        contactForm.setPhoneNumber(contact.getPhoneNumber());
+        contactForm.setDescription(contact.getDescription());
+        contactForm.setFavorite(contact.getFavorite());
+        contactForm.setLinkedinLink(contact.getLinkedinLink());
+        contactForm.setInstagramLink(contact.getInstagramLink());
+        contactForm.setImage(contact.getPicture());
+        model.addAttribute("contactForm",contactForm);
+        model.addAttribute("contactId",contactId);
 
+        return "user/update_contact_view";
+
+    }
+    @RequestMapping(value = "/update/{contactId}", method = RequestMethod.POST)
+    public String updateContact(
+            @PathVariable("contactId") String contactId,
+            @Valid @ModelAttribute ContactForm contactForm,
+            BindingResult bindingResult,
+            Authentication authentication,
+            RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            return "user/update_contact_view";
+        }
+
+        // Fetch existing contact from DB first
+        Contact existingContact = contactService.getById(contactId);
+        existingContact.setName(contactForm.getName());
+        existingContact.setEmail(contactForm.getEmail());
+        existingContact.setAddress(contactForm.getAddress());
+        existingContact.setPhoneNumber(contactForm.getPhoneNumber());
+        existingContact.setDescription(contactForm.getDescription());
+        existingContact.setFavorite(contactForm.getFavorite());
+        existingContact.setLinkedinLink(contactForm.getLinkedinLink());
+        existingContact.setInstagramLink(contactForm.getInstagramLink());
+        if (contactForm.getPicture() != null
+                && !contactForm.getPicture().isEmpty()
+                && contactForm.getPicture().getSize() > 0) {
+
+            String url = imageService.uploadImage(contactForm.getPicture());
+            existingContact.setPicture(url);
+        }
+
+        contactService.updateUser(existingContact);
+
+        redirectAttributes.addFlashAttribute("message",
+                Message.builder()
+                        .message("Contact updated successfully")
+                        .messageType(MessageType.green)
+                        .build());
+
+        return "redirect:/user/contacts/view/" + contactId;
     }
 
 }
