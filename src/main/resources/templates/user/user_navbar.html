@@ -1,6 +1,10 @@
 
-    <nav th:fragment="user_navbar" class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-700 sm:pl-64 fixed w-full top-0 left-0 right-0">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
+<nav th:fragment="user_navbar"
+     id="user-navbar"
+     class="fixed top-0 left-0 right-0 z-20 w-full sm:pl-64
+            border-b border-gray-200 dark:border-gray-700
+            bg-white dark:bg-gray-900 shadow">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
             <button data-drawer-target="logo-sidebar"
                     data-drawer-toggle="logo-sidebar"
                     aria-controls="logo-sidebar"

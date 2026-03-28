@@ -99,5 +99,68 @@
 #view-contact-modal .info-chip:hover .icon-badge {
     transform: scale(1.15);
 }
+body{
+    background-color: #f8faff;
+    background-image:
+            radial-gradient(at 20% 20%, rgba(99,102,241,0.15) 0%, transparent 60%),
+            radial-gradient(at 80% 0%, rgba(168,85,247,0.12) 0%, transparent 50%),
+            radial-gradient(at 80% 80%, rgba(236,72,153,0.10) 0%, transparent 50%),
+            radial-gradient(at 0% 80%, rgba(59,130,246,0.10) 0%, transparent 50%);
+>
+}
+.dark body {
+    background-color: #030712;
+    background-image:
+            radial-gradient(at 20% 20%, rgba(99,102,241,0.12) 0%, transparent 60%),
+            radial-gradient(at 80% 0%, rgba(168,85,247,0.10) 0%, transparent 50%),
+            radial-gradient(at 80% 80%, rgba(236,72,153,0.08) 0%, transparent 50%),
+            radial-gradient(at 0% 80%, rgba(59,130,246,0.08) 0%, transparent 50%);
+}
+#logo-sidebar {
+    border-right: #0f172a 0.5px solid ; /* Tailwind gray-200 */
+}
+
+.dark #logo-sidebar {
+    border-right: 0.5px solid #374151; /* Tailwind gray-700, lighter than bg */
+}
+#logo-sidebar{
+    background-color: #f8faff;
+    background-image:
+            radial-gradient(at 20% 20%, rgba(99,102,241,0.15) 0%, transparent 60%),
+            radial-gradient(at 80% 0%, rgba(168,85,247,0.12) 0%, transparent 50%),
+            radial-gradient(at 80% 80%, rgba(236,72,153,0.10) 0%, transparent 50%),
+            radial-gradient(at 0% 80%, rgba(59,130,246,0.10) 0%, transparent 50%);
+
+}
+.dark #logo-sidebar{
+    background-color: #030712;
+    background-image:
+            radial-gradient(at 20% 20%, rgba(99,102,241,0.12) 0%, transparent 60%),
+            radial-gradient(at 80% 0%, rgba(168,85,247,0.10) 0%, transparent 50%),
+            radial-gradient(at 80% 80%, rgba(236,72,153,0.08) 0%, transparent 50%),
+            radial-gradient(at 0% 80%, rgba(59,130,246,0.08) 0%, transparent 50%);
+
+}
+#user-navbar {
+    background-color: #f8faff;
+    background-image:
+            radial-gradient(at 20% 20%, rgba(99,102,241,0.15) 0%, transparent 60%),
+            radial-gradient(at 80% 0%, rgba(168,85,247,0.12) 0%, transparent 50%),
+            radial-gradient(at 80% 80%, rgba(236,72,153,0.10) 0%, transparent 50%),
+            radial-gradient(at 0% 80%, rgba(59,130,246,0.10) 0%, transparent 50%);
+}
+
+.dark #user-navbar {
+    background-color: #030712;
+    background-image:
+            radial-gradient(at 20% 20%, rgba(99,102,241,0.12) 0%, transparent 60%),
+            radial-gradient(at 80% 0%, rgba(168,85,247,0.10) 0%, transparent 50%),
+            radial-gradient(at 80% 80%, rgba(236,72,153,0.08) 0%, transparent 50%),
+            radial-gradient(at 0% 80%, rgba(59,130,246,0.08) 0%, transparent 50%);
+}
+
+
+
+
 
 

@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.majorproject.contactsphere.Services.ContactService;
+import org.majorproject.contactsphere.Services.EmailService;
 import org.majorproject.contactsphere.Services.ImageService;
 import org.majorproject.contactsphere.Services.UserService;
 import org.majorproject.contactsphere.entities.Contact;
@@ -24,10 +25,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.List;
 import java.util.UUID;
-
 @Controller
 @RequestMapping("/user/contacts")
 public class ContactController {
@@ -38,6 +37,8 @@ public class ContactController {
     private ImageService imageService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping("/add")
     public String addContactView(Model model   ) {
@@ -111,6 +112,7 @@ public class ContactController {
         model.addAttribute("pageContact",pageContact);
         model.addAttribute("contactSearchForm",contactSearchForm);
 
+
         return "user/search";
     }
     @RequestMapping("/delete/{userId}")
@@ -152,8 +154,6 @@ public class ContactController {
         if (bindingResult.hasErrors()) {
             return "user/update_contact_view";
         }
-
-        // Fetch existing contact from DB first
         Contact existingContact = contactService.getById(contactId);
         existingContact.setName(contactForm.getName());
         existingContact.setEmail(contactForm.getEmail());

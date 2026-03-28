@@ -24,11 +24,12 @@
     <div class="p-6">
       <div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm">
           <!-- Search -->
+        <div class="flex justify-between items-center bg-white dark:bg-gray-800">
         <form th:object="${contactSearchForm}" th:action="@{'/user/contacts/search'}">
         <div class="flex flex-wrap items-center justify-center gap-2 p-4">
 
           <!-- Filter + Search grouped -->
-          <div class="flex items-center rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm overflow-visible">
+          <div class="flex items-center rounded-xl border border-gray-200 dark:border-gray-600  shadow-sm overflow-visible">
 
             <!-- Filter Dropdown -->
             <select  th:field="*{field}" id="filterSelect"
@@ -56,6 +57,14 @@
 
         </div>
         </form>
+          <div class="p-4">
+          <button type="submit"
+                  onclick="exportData()"
+                  class="inline-flex items-center gap-1.5 px-4 h-10 text-sm font-medium text-white bg-green-600 hover:bg-green-700 active:scale-95 rounded-xl transition-all duration-150 focus:outline-none shadow-sm whitespace-nowrap">
+            Export
+          </button>
+          </div>
+        </div>
 
         <!-- Table -->
         <div class="overflow-x-auto">
@@ -150,7 +159,49 @@
     </div>
     <div th:replace="~{user/contact_modals::contact}"></div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   <script th:src="@{'/JS/contacts.js'}"></script>
+  <script>
+    function exportData() {
+      const rows = document.querySelectorAll("#contactsTable tbody tr");
+
+      const headers = ["Photo URL", "Name", "Email", "Phone", "Address", "Favorite", "LinkedIn", "Instagram"];
+      const data = [headers];
+
+      rows.forEach(tr => {
+        const img = tr.querySelector("img");
+        const photoUrl = img ? img.src : "";
+
+        const nameEl = tr.querySelector(".font-semibold.text-gray-800, .font-semibold");
+        const name = nameEl ? nameEl.textContent.trim() : "";
+
+        const emailEl = tr.querySelector(".text-xs.text-gray-400");
+        const email = emailEl ? emailEl.textContent.trim() : "";
+
+        const phoneEl = tr.querySelector("td:nth-child(2) span");
+        const phone = phoneEl ? phoneEl.textContent.trim() : "";
+
+        const addressEl = tr.querySelector("td:nth-child(3)");
+        const address = addressEl ? addressEl.textContent.trim() : "";
+
+        const favoriteEl = tr.querySelector(".fa-solid.fa-star");
+        const favorite = favoriteEl ? "Yes" : "No";
+
+        const linkedinEl = tr.querySelector(".fa-linkedin");
+        const linkedin = linkedinEl ? linkedinEl.closest("a").href : "";
+
+        const instagramEl = tr.querySelector(".fa-square-instagram");
+        const instagram = instagramEl ? instagramEl.closest("a").href : "";
+
+        data.push([photoUrl, name, email, phone, address, favorite, linkedin, instagram]);
+      });
+
+      const ws = XLSX.utils.aoa_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Contacts");
+      XLSX.writeFile(wb, "contacts.xlsx");
+    }
+  </script>
 </div>
 </body>
 </html>

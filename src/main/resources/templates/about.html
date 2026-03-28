@@ -3,11 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About</title>
+    <title>About — ContactSphere</title>
 </head>
 <body>
-   <div id="content1">
-       <h3>Welcome to About page</h3>
-   </div>
+<div id="content1">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap');
+
+        /* Break out of base.html's p-4 pt-20 wrapper */
+        #content1 {
+            margin: -1rem;
+            margin-top: -1rem;
+            width: calc(100% + 2rem);
+        }
+
+        .about-wrap {
+            font-family: 'Instrument Sans', sans-serif;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .display-font { font-family: 'Syne', sans-serif; }
+
+        /* Dark mode via CSS class on <html> or <body> */
+        .about-wrap { background: #ffffff; color: #111827; }
+        .dark .about-wrap { background: #030712; color: #f9fafb; }
+
+        .about-section-alt { background: #f9fafb; }
+        .dark .about-section-alt { background: rgba(17,24,39,0.5); }
+
+        .about-card {
+            background: #ffffff;
+            border: 1px solid #f3f4f6;
+        }
+        .dark .about-card {
+            background: #111827;
+            border-color: #1f2937;
+        }
+
+        .about-badge-bg { background: #eef2ff; border-color: #c7d2fe; color: #4338ca; }
+        .dark .about-badge-bg { background: rgba(67,56,202,0.15); border-color: rgba(99,102,241,0.3); color: #a5b4fc; }
+
+        .about-eyebrow { background: #eef2ff; border: 1px solid #c7d2fe; color: #4338ca; }
+        .dark .about-eyebrow { background: rgba(67,56,202,0.15); border-color: rgba(99,102,241,0.3); color: #a5b4fc; }
+
+        .about-h { color: #111827; }
+        .dark .about-h { color: #f9fafb; }
+
+        .about-p { color: #6b7280; }
+        .dark .about-p { color: #9ca3af; }
+
+        .about-sub { color: #374151; }
+        .dark .about-sub { color: #d1d5db; }
+
+        .tech-badge-wrap {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+        }
+        .dark .tech-badge-wrap {
+            background: #1f2937;
+            border-color: #374151;
+        }
+
+        .stat-number {
+            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+            transform 0.65s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .feature-card {
+            transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1),
+            box-shadow 0.25s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 48px rgba(99,102,241,0.13);
+        }
+
+        .tech-badge { transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+        .tech-badge:hover { transform: translateY(-3px) scale(1.08); }
+
+        .grad-border { position: relative; border-radius: 20px; }
+        .grad-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 21px;
+            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .grad-border:hover::before { opacity: 1; }
+
+        .stats-border {
+            border-top: 1px solid #f3f4f6;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .dark .stats-border {
+            border-color: #1f2937;
+        }
+
+        @keyframes toastIn {
+            from { opacity:0; transform:translateX(60px) scale(0.95); }
+            to   { opacity:1; transform:translateX(0) scale(1); }
+        }
+    </style>
+
+    <div class="about-wrap">
+
+        <!-- ═══ HERO ═══ -->
+        <section style="position:relative; padding: 80px 24px 100px; overflow:hidden; text-align:center;">
+            <div class="blob" style="width:380px;height:380px;background:#6366f1;top:-40px;left:20%"></div>
+            <div class="blob" style="width:300px;height:300px;background:#a855f7;top:0;right:20%"></div>
+            <div class="blob" style="width:240px;height:240px;background:#ec4899;top:80px;left:5%"></div>
+
+            <!-- Grid overlay -->
+            <div style="position:absolute;inset:0;opacity:0.04;pointer-events:none;
+                background-image:linear-gradient(#6366f1 1px,transparent 1px),linear-gradient(90deg,#6366f1 1px,transparent 1px);
+                background-size:48px 48px;"></div>
+
+            <div style="position:relative;max-width:800px;margin:0 auto;">
+
+                <div class="reveal about-eyebrow" style="display:inline-flex;align-items:center;gap:8px;
+                  padding:6px 16px;border-radius:999px;font-size:11px;font-weight:700;
+                  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:28px;">
+        <span style="width:6px;height:6px;background:#6366f1;border-radius:50%;
+                     animation:pulse 2s infinite;display:inline-block;"></span>
+                    About ContactSphere
+                </div>
+
+                <h1 class="reveal display-font about-h"
+                    style="font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;
+                 line-height:1.05;letter-spacing:-0.02em;margin-bottom:20px;
+                 animation-delay:0.1s">
+                    Your Contacts,
+                    <span style="position:relative;display:inline-block;">
+          <span class="stat-number">Reimagined</span>
+          <svg style="position:absolute;bottom:-6px;left:0;width:100%;" viewBox="0 0 300 12" fill="none">
+            <path d="M2 8 Q75 2 150 8 Q225 14 298 8" stroke="url(#ul1)" stroke-width="3" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="ul1" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366f1"/><stop offset="0.5" stop-color="#a855f7"/>
+                <stop offset="1" stop-color="#ec4899"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+                </h1>
+
+                <p class="reveal about-p" style="font-size:1.1rem;max-width:560px;margin:0 auto 36px;
+               line-height:1.7;animation-delay:0.2s">
+                    ContactSphere is a modern contact management platform built to help you organize,
+                    discover, and connect with the people that matter most — beautifully and effortlessly.
+                </p>
+
+                <div class="reveal" style="display:flex;align-items:center;justify-content:center;
+                  gap:12px;flex-wrap:wrap;animation-delay:0.3s">
+                    <a href="/user/contacts"
+                       style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;
+                  background:linear-gradient(135deg,#6366f1,#a855f7,#ec4899);
+                  color:white;font-size:14px;font-weight:600;border-radius:16px;
+                  box-shadow:0 8px 24px rgba(99,102,241,0.3);text-decoration:none;
+                  transition:transform 0.2s,box-shadow 0.2s;"
+                       onmouseover="this.style.transform='scale(1.05)'"
+                       onmouseout="this.style.transform='scale(1)'">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        View Contacts
+                    </a>
+                    <a href="/user/contacts/add"
+                       class="about-card"
+                       style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;
+                  font-size:14px;font-weight:600;border-radius:16px;text-decoration:none;
+                  transition:transform 0.2s;"
+                       onmouseover="this.style.transform='scale(1.05)'"
+                       onmouseout="this.style.transform='scale(1)'">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Add Contact
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ STATS ═══ -->
+        <section class="stats-border" style="padding:56px 24px;">
+            <div style="max-width:800px;margin:0 auto;display:grid;
+                grid-template-columns:repeat(4,1fr);gap:24px;">
+                <div class="reveal" style="text-align:center;">
+                    <p class="stat-number display-font" style="font-size:3rem;font-weight:800;margin-bottom:4px;">∞</p>
+                    <p class="about-p" style="font-size:13px;font-weight:500;">Contacts</p>
+                </div>
+                <div class="reveal" style="text-align:center;animation-delay:0.1s">
+                    <p class="stat-number display-font" style="font-size:3rem;font-weight:800;margin-bottom:4px;">3s</p>
+                    <p class="about-p" style="font-size:13px;font-weight:500;">Avg. Add Time</p>
+                </div>
+                <div class="reveal" style="text-align:center;animation-delay:0.2s">
+                    <p class="stat-number display-font" style="font-size:3rem;font-weight:800;margin-bottom:4px;">100%</p>
+                    <p class="about-p" style="font-size:13px;font-weight:500;">Secure</p>
+                </div>
+                <div class="reveal" style="text-align:center;animation-delay:0.3s">
+                    <p class="stat-number display-font" style="font-size:3rem;font-weight:800;margin-bottom:4px;">24/7</p>
+                    <p class="about-p" style="font-size:13px;font-weight:500;">Available</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ FEATURES ═══ -->
+        <section style="padding:80px 24px;">
+            <div style="max-width:1000px;margin:0 auto;">
+
+                <div class="reveal" style="text-align:center;margin-bottom:56px;">
+                    <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;
+                  text-transform:uppercase;color:#a855f7;margin-bottom:10px;">What We Offer</p>
+                    <h2 class="display-font about-h" style="font-size:2.5rem;font-weight:800;">Everything You Need</h2>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+
+                    <!-- Feature cards -->
+                    <div class="reveal feature-card grad-border about-card" style="border-radius:20px;padding:24px;animation-delay:0.1s">
+                        <div style="width:44px;height:44px;border-radius:14px;margin-bottom:18px;
+                      background:linear-gradient(135deg,#6366f1,#7c3aed);
+                      display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 8px 20px rgba(99,102,241,0.3);">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="display-font about-h" style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">Smart Search</h3>
+                        <p class="about-p" style="font-size:13.5px;line-height:1.6;">Search by name, email, phone, or address instantly. Find anyone in seconds.</p>
+                    </div>
+
+                    <div class="reveal feature-card grad-border about-card" style="border-radius:20px;padding:24px;animation-delay:0.2s">
+                        <div style="width:44px;height:44px;border-radius:14px;margin-bottom:18px;
+                      background:linear-gradient(135deg,#a855f7,#ec4899);
+                      display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 8px 20px rgba(168,85,247,0.3);">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="display-font about-h" style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">Favourites</h3>
+                        <p class="about-p" style="font-size:13.5px;line-height:1.6;">Star your most important contacts and keep them front and center.</p>
+                    </div>
+
+                    <div class="reveal feature-card grad-border about-card" style="border-radius:20px;padding:24px;animation-delay:0.3s">
+                        <div style="width:44px;height:44px;border-radius:14px;margin-bottom:18px;
+                      background:linear-gradient(135deg,#ec4899,#f97316);
+                      display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 8px 20px rgba(236,72,153,0.3);">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                            </svg>
+                        </div>
+                        <h3 class="display-font about-h" style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">Social Links</h3>
+                        <p class="about-p" style="font-size:13.5px;line-height:1.6;">Store LinkedIn, Instagram, and website links. One place for everything.</p>
+                    </div>
+
+                    <div class="reveal feature-card grad-border about-card" style="border-radius:20px;padding:24px;animation-delay:0.1s">
+                        <div style="width:44px;height:44px;border-radius:14px;margin-bottom:18px;
+                      background:linear-gradient(135deg,#0ea5e9,#6366f1);
+                      display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 8px 20px rgba(14,165,233,0.3);">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="display-font about-h" style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">Photo Uploads</h3>
+                        <p class="about-p" style="font-size:13.5px;line-height:1.6;">Upload profile photos via Cloudinary. Visual recognition at a glance.</p>
+                    </div>
+
+                    <div class="reveal feature-card grad-border about-card" style="border-radius:20px;padding:24px;animation-delay:0.2s">
+                        <div style="width:44px;height:44px;border-radius:14px;margin-bottom:18px;
+                      background:linear-gradient(135deg,#10b981,#0d9488);
+                      display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 8px 20px rgba(16,185,129,0.3);">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <h3 class="display-font about-h" style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">Secure Auth</h3>
+                        <p class="about-p" style="font-size:13.5px;line-height:1.6;">Login with Google OAuth or email. Spring Security keeps your data safe.</p>
+                    </div>
+
+                    <div class="reveal feature-card grad-border about-card" style="border-radius:20px;padding:24px;animation-delay:0.3s">
+                        <div style="width:44px;height:44px;border-radius:14px;margin-bottom:18px;
+                      background:linear-gradient(135deg,#f59e0b,#ef4444);
+                      display:flex;align-items:center;justify-content:center;
+                      box-shadow:0 8px 20px rgba(245,158,11,0.3);">
+                            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="display-font about-h" style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">Dark Mode</h3>
+                        <p class="about-p" style="font-size:13.5px;line-height:1.6;">Full dark mode support. Easy on the eyes, day or night.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ TECH STACK ═══ -->
+        <section class="about-section-alt" style="padding:72px 24px;">
+            <div style="max-width:800px;margin:0 auto;text-align:center;">
+                <div class="reveal" style="margin-bottom:40px;">
+                    <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;
+                  text-transform:uppercase;color:#6366f1;margin-bottom:10px;">Built With</p>
+                    <h2 class="display-font about-h" style="font-size:2.2rem;font-weight:800;">Tech Stack</h2>
+                </div>
+                <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;animation-delay:0.1s">
+                    <div class="tech-badge tech-badge-wrap" style="display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;">
+                        <div style="width:28px;height:28px;background:#16a34a;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">Sb</div>
+                        <span class="about-sub" style="font-size:13px;font-weight:600;">Spring Boot</span>
+                    </div>
+                    <div class="tech-badge tech-badge-wrap" style="display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;">
+                        <div style="width:28px;height:28px;background:#2563eb;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">Th</div>
+                        <span class="about-sub" style="font-size:13px;font-weight:600;">Thymeleaf</span>
+                    </div>
+                    <div class="tech-badge tech-badge-wrap" style="display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;">
+                        <div style="width:28px;height:28px;background:#0891b2;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">Tw</div>
+                        <span class="about-sub" style="font-size:13px;font-weight:600;">Tailwind CSS</span>
+                    </div>
+                    <div class="tech-badge tech-badge-wrap" style="display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;">
+                        <div style="width:28px;height:28px;background:#ea580c;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">Hi</div>
+                        <span class="about-sub" style="font-size:13px;font-weight:600;">Hibernate / JPA</span>
+                    </div>
+                    <div class="tech-badge tech-badge-wrap" style="display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;">
+                        <div style="width:28px;height:28px;background:#1e40af;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">My</div>
+                        <span class="about-sub" style="font-size:13px;font-weight:600;">MySQL</span>
+                    </div>
+                    <div class="tech-badge tech-badge-wrap" style="display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;">
+                        <div style="width:28px;height:28px;background:#7c3aed;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">Cl</div>
+                        <span class="about-sub" style="font-size:13px;font-weight:600;">Cloudinary</span>
+                    </div>
+                    <div class="tech-badge tech-badge-wrap" style="display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;">
+                        <div style="width:28px;height:28px;background:#1f2937;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">SS</div>
+                        <span class="about-sub" style="font-size:13px;font-weight:600;">Spring Security</span>
+                    </div>
+                    <div class="tech-badge tech-badge-wrap" style="display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;">
+                        <div style="width:28px;height:28px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">Fb</div>
+                        <span class="about-sub" style="font-size:13px;font-weight:600;">Flowbite</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ CTA ═══ -->
+        <section style="padding:80px 24px;">
+            <div style="max-width:720px;margin:0 auto;">
+                <div class="reveal" style="position:relative;overflow:hidden;border-radius:28px;padding:72px 48px;
+                  text-align:center;background:linear-gradient(135deg,#4f46e5,#7c3aed,#db2777);">
+                    <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;
+                    background:rgba(255,255,255,0.08);border-radius:50%;"></div>
+                    <div style="position:absolute;bottom:-32px;left:-32px;width:128px;height:128px;
+                    background:rgba(255,255,255,0.08);border-radius:50%;"></div>
+                    <div style="position:relative;z-index:1;">
+                        <h2 class="display-font" style="font-size:2.2rem;font-weight:800;color:white;margin-bottom:12px;">
+                            Ready to Get Started?
+                        </h2>
+                        <p style="color:rgba(255,255,255,0.8);font-size:1rem;margin-bottom:32px;max-width:400px;
+                    margin-left:auto;margin-right:auto;line-height:1.6;">
+                            Start organizing your contacts today. Fast, free, and beautiful.
+                        </p>
+                        <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
+                            <a href="/user/contacts/add"
+                               style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;
+                      background:white;color:#4f46e5;font-weight:700;font-size:14px;
+                      border-radius:16px;text-decoration:none;transition:transform 0.2s;
+                      box-shadow:0 8px 24px rgba(0,0,0,0.15);"
+                               onmouseover="this.style.transform='scale(1.05)'"
+                               onmouseout="this.style.transform='scale(1)'">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                                </svg>
+                                Add First Contact
+                            </a>
+                            <a href="/user/contacts"
+                               style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;
+                      background:rgba(255,255,255,0.15);color:white;font-weight:600;font-size:14px;
+                      border-radius:16px;border:1px solid rgba(255,255,255,0.3);text-decoration:none;
+                      transition:transform 0.2s,background 0.2s;"
+                               onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+                               onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+                                Browse Contacts
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Scroll reveal
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            obs.observe(el);
+            if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+        });
+    </script>
+
+</div>
 </body>
 </html>

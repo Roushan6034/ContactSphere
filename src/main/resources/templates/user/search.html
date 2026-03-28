@@ -20,11 +20,12 @@
     <div class="p-6">
       <div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm">
         <!-- Search -->
+        <div class="flex justify-between items-center bg-white dark:bg-gray-800">
         <form th:object="${contactSearchForm}" th:action="@{'/user/contacts/search'}">
           <div class="flex flex-wrap items-center justify-center gap-2 p-4">
 
             <!-- Filter + Search grouped -->
-            <div class="flex items-center rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm overflow-visible">
+            <div class="flex items-center rounded-xl border border-gray-200 dark:border-gray-600  shadow-sm overflow-visible">
 
               <!-- Filter Dropdown -->
               <select  th:field="*{field}" id="filterSelect"
@@ -52,6 +53,14 @@
 
           </div>
         </form>
+          <div class="p-4">
+            <button type="submit"
+                    class="inline-flex items-center gap-1.5 px-4 h-10 text-sm font-medium text-white bg-green-600 hover:bg-green-700 active:scale-95 rounded-xl transition-all duration-150 focus:outline-none shadow-sm whitespace-nowrap">
+              Export
+            </button>
+          </div>
+        </div>
+
 
         <!-- Table -->
         <div class="overflow-x-auto">

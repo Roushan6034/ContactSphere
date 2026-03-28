@@ -3,12 +3,17 @@ package org.majorproject.contactsphere;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.net.Socket;
+
 @SpringBootApplication
 
 public class ContactSphereApplication {
 
+
     public static void main(String[] args) {
-//        System.out.println("DB_PASSWORD: " + System.getenv("DB_PASSWORD"));
+        System.setProperty("java.net.useSystemProxies", "false");
+
+
         SpringApplication.run(ContactSphereApplication.class, args);
     }
 

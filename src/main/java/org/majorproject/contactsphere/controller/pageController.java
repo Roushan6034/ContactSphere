@@ -67,6 +67,7 @@ public class pageController {
         user.setName(userForm.getName());
         user.setAbout(userForm.getAbout());
         user.setPhoneNumber(userForm.getPhoneNumber());
+//        user.setEnabled(true);
         user.setProfilePic("https://www.shutterstock.com/image-vector/black-silhouette-man-male-head-260nw-2433765529.jpg");
         User savedUser = userService.saveUser(user);
         Message message = Message.builder().message("Registration Successfully Completed!!!").messageType(MessageType.green).build();
